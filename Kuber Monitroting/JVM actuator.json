@@ -1,0 +1,3874 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Dashboard for Micrometer instrumented services (Java, Spring Boot, Micronaut)",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 4701,
+  "graphTooltip": 1,
+  "id": 250,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 125,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Quick Facts",
+      "type": "row"
+    },
+    {
+      "chart": "prefix",
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 63,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_uptime_seconds{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "chart": "prefix",
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "dateTimeAsIso"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 92,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_start_time_seconds{pod=~\"$pod\"}*1000",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "Start time",
+      "type": "stat"
+    },
+    {
+      "chart": "prefix",
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)"
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 65,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_used_bytes{pod=~\"$pod\", area=\"heap\"})*100/sum(jvm_memory_max_bytes{pod=~\"$pod\", area=\"heap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "Heap used",
+      "type": "stat"
+    },
+    {
+      "chart": "prefix",
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            },
+            {
+              "options": {
+                "from": -1e+32,
+                "result": {
+                  "text": "N/A"
+                },
+                "to": 0
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)"
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 18,
+        "y": 1
+      },
+      "id": 75,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_used_bytes{pod=~\"$pod\", area=\"nonheap\"})*100/sum(jvm_memory_max_bytes{pod=~\"$pod\", area=\"nonheap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "Non-Heap used",
+      "type": "stat"
+    },
+    {
+      "chart": "prefix",
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            },
+            {
+              "options": {
+                "from": -1e+32,
+                "result": {
+                  "text": "N/A"
+                },
+                "to": 0
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)"
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 1
+      },
+      "id": 140,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "system_cpu_count{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "CPU core",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 126,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "I/O Overview",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 111,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(rate(http_server_requests_seconds_count{pod=~\"$pod\"}[1m]))",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "HTTP",
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:275",
+          "format": "ops",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:276",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {
+        "HTTP": "#890f02",
+        "HTTP - 5xx": "#bf1b00"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 112,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(rate(http_server_requests_seconds_count{pod=~\"$pod\", status=~\"5..\"}[1m]))",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "HTTP - 5xx",
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:330",
+          "format": "ops",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:331",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 113,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(rate(http_server_requests_seconds_sum{pod=~\"$pod\", status!~\"5..\"}[1m]))/sum(rate(http_server_requests_seconds_count{pod=~\"$pod\", status!~\"5..\"}[1m]))",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "HTTP - AVG",
+          "pql": true,
+          "refId": "A"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "max(http_server_requests_seconds_max{pod=~\"$pod\", status!~\"5..\"})",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "HTTP - MAX",
+          "pql": true,
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Duration",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:385",
+          "format": "s",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:386",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 119,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "tomcat_threads_busy_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TOMCAT - BSY",
+          "pql": true,
+          "refId": "A"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "tomcat_threads_current_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TOMCAT - CUR",
+          "pql": true,
+          "refId": "B"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "tomcat_threads_config_max_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "TOMCAT - MAX",
+          "pql": true,
+          "refId": "C"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jetty_threads_busy{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "JETTY - BSY",
+          "pql": true,
+          "refId": "D"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jetty_threads_current{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "JETTY - CUR",
+          "pql": true,
+          "refId": "E"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jetty_threads_config_max{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "JETTY - MAX",
+          "pql": true,
+          "refId": "F"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Utilisation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:440",
+          "format": "short",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:441",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 127,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "JVM Memory",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_used_bytes{pod=~\"$pod\", area=\"heap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_committed_bytes{pod=~\"$pod\", area=\"heap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "committed",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_max_bytes{pod=~\"$pod\", area=\"heap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "JVM Heap",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:495",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:496",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 25,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_used_bytes{pod=~\"$pod\", area=\"nonheap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_committed_bytes{pod=~\"$pod\", area=\"nonheap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "committed",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_max_bytes{pod=~\"$pod\", area=\"nonheap\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "JVM Non-Heap",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:550",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:551",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 26,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_used_bytes{pod=~\"$pod\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_committed_bytes{pod=~\"$pod\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "committed",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "sum(jvm_memory_max_bytes{pod=~\"$pod\"})",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "JVM Total",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:605",
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:606",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 86,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_memory_vss_bytes{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "vss",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_memory_rss_bytes{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "rss",
+          "pql": true,
+          "refId": "B"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_memory_swap_bytes{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "swap",
+          "pql": true,
+          "refId": "C"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_memory_rss_bytes{pod=~\"$pod\"} + process_memory_swap_bytes{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "total",
+          "pql": true,
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "JVM Process Memory",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:660",
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:661",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 128,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "JVM Misc",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 106,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "system_cpu_usage{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "system",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_cpu_usage{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "process",
+          "pql": true,
+          "refId": "B"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "avg_over_time(process_cpu_usage{pod=~\"$pod\"}[1h])",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "process-1h",
+          "pql": true,
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "CPU Usage",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:727",
+          "decimals": 1,
+          "format": "percentunit",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:728",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 93,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "system_load_average_1m{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "system-1m",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "system_cpu_count{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "cpus",
+          "pql": true,
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Load",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:782",
+          "decimals": 1,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:783",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 32,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_threads_live_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "live",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_threads_daemon_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "daemon",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_threads_peak_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "peak",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "process",
+          "pql": true,
+          "refId": "D",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Threads",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:837",
+          "decimals": 0,
+          "format": "short",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:838",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {
+        "blocked": "#bf1b00",
+        "new": "#fce2de",
+        "runnable": "#7eb26d",
+        "terminated": "#511749",
+        "timed-waiting": "#c15c17",
+        "waiting": "#eab839"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 21
+      },
+      "hiddenSeries": false,
+      "id": 124,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_threads_states_threads{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{state}}",
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Thread States",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:892",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:893",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {
+        "debug": "#1F78C1",
+        "error": "#BF1B00",
+        "info": "#508642",
+        "trace": "#6ED0E0",
+        "warn": "#EAB839"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 18,
+        "x": 0,
+        "y": 28
+      },
+      "height": "",
+      "hiddenSeries": false,
+      "id": 91,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": true,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:967",
+          "alias": "error",
+          "yaxis": 1
+        },
+        {
+          "$$hashKey": "object:968",
+          "alias": "warn",
+          "yaxis": 1
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "increase(logback_events_total{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "{{level}}",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Log Events",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:981",
+          "decimals": 0,
+          "format": "opm",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:982",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 28
+      },
+      "hiddenSeries": false,
+      "id": 61,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_files_open_files{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "open",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "process_files_max_files{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "File Descriptors",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1036",
+          "decimals": 0,
+          "format": "short",
+          "logBase": 10,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1037",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 129,
+      "panels": [],
+      "repeat": "persistence_counts",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "JVM Memory Pools (Heap)",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
+      "id": 3,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "jvm_memory_pool_heap",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_used_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_heap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_committed_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_heap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "commited",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_max_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_heap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$jvm_memory_pool_heap",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1103",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1104",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 64
+      },
+      "id": 130,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "JVM Memory Pools (Non-Heap)",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 65
+      },
+      "hiddenSeries": false,
+      "id": 78,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "maxPerRow": 3,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "jvm_memory_pool_nonheap",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_used_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_nonheap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_committed_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_nonheap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "commited",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_memory_max_bytes{pod=~\"$pod\", id=~\"$jvm_memory_pool_nonheap\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "max",
+          "pql": true,
+          "refId": "C",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$jvm_memory_pool_nonheap",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "mbytes",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1399",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1400",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 86
+      },
+      "id": 131,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Garbage Collection",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 87
+      },
+      "hiddenSeries": false,
+      "id": 98,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "rate(jvm_gc_pause_seconds_count{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{action}} ({{cause}})",
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Collections",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1494",
+          "format": "ops",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1495",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 87
+      },
+      "hiddenSeries": false,
+      "id": 101,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "rate(jvm_gc_pause_seconds_sum{pod=~\"$pod\"}[1m])/rate(jvm_gc_pause_seconds_count{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "avg {{action}} ({{cause}})",
+          "pql": true,
+          "refId": "A"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_gc_pause_seconds_max{pod=~\"$pod\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "max {{action}} ({{cause}})",
+          "pql": true,
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Pause Durations",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1549",
+          "format": "s",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1550",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 87
+      },
+      "hiddenSeries": false,
+      "id": 99,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "rate(jvm_gc_memory_allocated_bytes_total{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "allocated",
+          "pql": true,
+          "refId": "A"
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "rate(jvm_gc_memory_promoted_bytes_total{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "promoted",
+          "pql": true,
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Allocated/Promoted",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1604",
+          "format": "Bps",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1605",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 94
+      },
+      "id": 132,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Classloading",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 95
+      },
+      "hiddenSeries": false,
+      "id": 37,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_classes_loaded_classes{pod=~\"$pod\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "loaded",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Classes loaded",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1659",
+          "format": "short",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1660",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 95
+      },
+      "hiddenSeries": false,
+      "id": 38,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "delta(jvm_classes_loaded_classes{pod=~\"$pod\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "delta-1m",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Class delta",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "ops",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1714",
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1715",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e0b16702-7f3c-413c-8b95-7aa00cb702af"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 102
+      },
+      "id": 133,
+      "panels": [],
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "pql": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Buffer Pools",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 103
+      },
+      "hiddenSeries": false,
+      "id": 33,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_memory_used_bytes{pod=~\"$pod\", id=\"direct\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_total_capacity_bytes{pod=~\"$pod\", id=\"direct\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "capacity",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Direct Buffers",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1769",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1770",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 103
+      },
+      "hiddenSeries": false,
+      "id": 83,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_count_buffers{pod=~\"$pod\", id=\"direct\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "count",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Direct Buffers",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1824",
+          "decimals": 0,
+          "format": "short",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1825",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 103
+      },
+      "hiddenSeries": false,
+      "id": 85,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_memory_used_bytes{pod=~\"$pod\", id=\"mapped\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "used",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        },
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_total_capacity_bytes{pod=~\"$pod\", id=\"mapped\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "capacity",
+          "pql": true,
+          "refId": "B",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Mapped Buffers",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1879",
+          "format": "bytes",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1880",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "P21BB2A4D622268FF"
+      },
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {
+        "leftLogBase": 1,
+        "rightLogBase": 1
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 103
+      },
+      "hiddenSeries": false,
+      "id": 84,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "9.2.3",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "expr": "jvm_buffer_count_buffers{pod=~\"$pod\", id=\"mapped\"}",
+          "format": "time_series",
+          "interval": "",
+          "legendFormat": "count",
+          "pql": true,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Mapped Buffers",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "y-axis": true,
+      "y_formats": [
+        "short",
+        "short"
+      ],
+      "yaxes": [
+        {
+          "$$hashKey": "object:1934",
+          "decimals": 0,
+          "format": "short",
+          "logBase": 1,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1935",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "definition": "label_values(up{namespace=~\"mirage-.*\"},pod)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "pod",
+        "options": [],
+        "query": "label_values(up{namespace=~\"mirage-.*\"},pod)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allFormat": "glob",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "definition": "label_values(jvm_memory_used_bytes{pod=~\"$pod\", area=\"heap\"},id)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "JVM Memory Pools Heap",
+        "multi": false,
+        "multiFormat": "glob",
+        "name": "jvm_memory_pool_heap",
+        "options": [],
+        "query": "label_values(jvm_memory_used_bytes{pod=~\"$pod\", area=\"heap\"},id)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allFormat": "glob",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "definition": "label_values(jvm_memory_used_bytes{pod=~\"$pod\", area=\"nonheap\"},id)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "JVM Memory Pools Non-Heap",
+        "multi": false,
+        "multiFormat": "glob",
+        "name": "jvm_memory_pool_nonheap",
+        "options": [],
+        "query": "label_values(jvm_memory_used_bytes{pod=~\"$pod\", area=\"nonheap\"},id)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-2d",
+    "to": "now"
+  },
+  "timepicker": {
+    "now": true,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "JVM (Micrometer) - Actuator",
+  "uid": "IRegZ6jVz",
+  "version": 11,
+  "weekStart": ""
+}

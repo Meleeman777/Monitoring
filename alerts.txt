@@ -1,0 +1,268 @@
+/*
+certs
+*/
+const query_start = '-60m'
+const error_query = `pql step=1h{group="pmp", env="prod", __name__ = "ssl_file_cert_not_after", file!~".+bundle.+"} - time()
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  instance, file
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 86400 * 30`
+
+
+/*
+services swarm
+*/
+
+const query = `pql count(rate(container_last_seen{group="pmp", env="prod"})) by (container_label_com_docker_swarm_service_name)
+| stats latest(value) as value by container_label_com_docker_swarm_service_name`
+
+const eventsPerModule = {}
+
+
+for(const timeRange of timeRanges) {
+    const mageParams = {
+        start: timeRange[1],
+        query: query
+    }
+
+    if(timeRange[0] != null) {
+        mageParams['end'] = timeRange[0]
+    }
+
+    const events = await mage(mageParams)
+
+    for(const event of events) {
+        if(!(event.container_label_com_docker_swarm_service_name in eventsPerModule)) {
+            eventsPerModule[event.container_label_com_docker_swarm_service_name] = []
+        }
+
+        eventsPerModule[event.container_label_com_docker_swarm_service_name].push(event)
+    }
+}
+console.log(eventsPerModule)
+
+
+const triggerNameData = []
+
+for(const container_label_com_docker_swarm_service_name in eventsPerModule) {
+    const events = eventsPerModule[container_label_com_docker_swarm_service_name]
+    const currentCount = events[0].value
+
+    for(let i = 1; i < events.length; i++) {
+        if(currentCount < events[i].value) {
+            triggerNameData.push({
+                container_label_com_docker_swarm_service_name,
+                value: events[i].value,
+                currentCount,
+                ago: timeRanges[i][0]
+            })
+            break;
+        }
+    }
+}
+
+const drilldownLines = []
+const gateId = [];
+
+for(const triggerData of triggerNameData) {
+    drilldownLines.push(`${triggerData.container_label_com_docker_swarm_service_name} | ${triggerData.currentCount} | ${triggerData.value} (${triggerData.ago})`);
+    gateId.push(triggerData.container_label_com_docker_swarm_service_name);
+}
+const gateString = gateId.filter((x,i,a) => a.indexOf(x)==i).join(',')
+const drilldownContent = drilldownLines.join("\n")
+
+if (drilldownLines.length > 0) {
+    await page({
+        addresses: ["email:pmp"],
+        message:"GROUP: pmp\n" +
+                "SITE: ОТД _\n" +
+                "NAME: Снижение количества сервисов\n\n" +
+                "DRILLDOWN:\n" +
+                drilldownLines.join("\n"),
+        cooldownKey: config.triggerName,
+        cooldownDuration: 60*15
+    });
+}
+
+/*
+Zookeeper: service is DOWN
+*/
+pql step=2m sum(up{group="_", env="prod", system="zookeeper_jmx_exporter"}) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 1
+
+/*
+Kafka: Active leader > 1
+*/
+pql step=1m sum(kafka_controller_kafkacontroller_activecontrollercount{group="mirage", env="prod"}) by (value,dc)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  dc
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value > 1
+/*
+Kafka: Decline topic count
+*/
+pql step=10m sum(kafka_controller_kafkacontroller_globaltopiccount{group="mirage", env="prod", system="kafka_jmx_exporter"}) by (value,dc)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  dc
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 8
+/*
+Kafka: No active controller
+*/
+pql step=1m sum(kafka_controller_kafkacontroller_activecontrollercount{group="mirage", env="prod"}) by (value,dc)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  dc
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 1
+/*
+Kafka: No Brokers online
+*/
+pql count(kafka_server_kafkaserver_brokerstate{env="prod",group="mirage"}[1m]) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value > 1
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Kafka: Offline partitions
+*/
+pql step=10m sum(kafka_controller_kafkacontroller_offlinepartitionscount{group="mirage", env="prod", system="kafka_jmx_exporter"}) by (value,dc)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  dc
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value >
+/*
+Kafka: service is DOWN
+*/
+pql step=2m count(up{group="mirage", env="prod", system="kafka_jmx_exporter"}) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value <
+/*
+Kafka: Zookeeper Sync Disconnected
+*/
+pql avg(kafka_server_sessionexpirelistener_zookeepersyncconnectspersec{env="prod",group="mirage"}[1m]) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value < 1
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Keepalived: node change detected
+*/
+pql step=30s changes(keepalived_vrrp_state{group="mirage", env="prod",system="keepalived_exporter"}[1m]) >0
+| stats latest(value) as value,latest(@timestamp) as @timestamp by inst
+| eval diff=round(date_diff(now(), @timestamp, "minute"))
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Keepalived: service is DOWN
+*/
+pql step=30s sum(keepalived_up{group="mirage",env="prod"}) by (inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by inst
+| eval diff=round(date_diff(now(), @timestamp, "minute"))
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value=0
+/*
+Nginx: High request time
+*/
+pql sum(increase(nginx_request_time{env="prod",group="mirage"})[1m]) by (value,inst) / sum(increase(nginx_request_count{env="prod",group="mirage"})[1m]) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value > 0.5
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Nginx: High response time
+*/
+pql sum(increase(nginx_upstream_response_time{env="prod",group="mirage"}[1m])) by (value, inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value > 0.5
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Nginx: not all connections are handled
+*/
+pql rate(nginx_connections_handled{group="mirage", env="prod",system="nginx_exporter"}[5m]) / rate(nginx_connections_accepted{group="mirage", env="prod",system="nginx_exporter"}[5m])
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  instance
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 1
+/*
+Nginx: service is DOWN
+*/
+pql step=1m{group="mirage", env="prod",system="nginx_exporter", __name__="nginx_up"}
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  instance
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value = 0
+/*
+Nginx: Количество 500 http-статусов > 100
+*/
+pql step=1m{group="mirage", system="mtail", nginx_status="500", env="prod"}
+| stats count, latest(@timestamp) as @timestamp  by inst
+| where count > 100
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| sort -count
+/*
+Node: Disk is almost full
+*/
+pql step=1m sum(node_filesystem_avail_bytes{group="mirage", env="prod"} * 100) by (inst, mountpoint) /  sum(node_filesystem_size_bytes{group="mirage",env="prod"}) by (inst, mountpoint)
+| stats latest(value) as value, latest(@timestamp) as date  by inst, mountpoint
+| where value < 10
+| eval perc = round(value)
+/*
+Node: Host has just been restarted
+*/
+pql step=1m sum(node_time_seconds{env="prod",group="mirage"}) by (inst) -  sum(node_boot_time_seconds{env="prod",group="mirage"}) by (inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value < 300
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Node: Host high CPU load
+*/
+pql step=1m 100 - (avg(rate(node_cpu_seconds_total{group="mirage",env="prod",mode="idle"}[2m])) by (inst) * 100)
+| stats latest(value) as value, latest(@timestamp) as date  by inst
+| where value > 80
+| eval perc = round(value)
+/*
+Node: Host out of memory
+*/
+pql step=1m sum(node_memory_MemAvailable_bytes{group="mirage", env="prod"}) by (inst) /  sum(node_memory_MemTotal_bytes{group="mirage",env="prod"}) by (inst) * 100
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value < 10
+| eval value = round(value)
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+Node: Lack of free swap space
+*/
+pql step=1m sum(node_memory_SwapFree_bytes{group="mirage", env="prod"} * 100) by (inst) /  sum(node_memory_SwapTotal_bytes{group="mirage", env="prod"}) by (inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp  by inst
+| where value < 80
+| eval perc = round(value)
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+/*
+PostgreSQL: high number of queries per second
+*/
+pql avg(irate(pg_stat_database_xact_commit{group="mirage", env="prod"}[5m]) + irate(pg_stat_database_xact_rollback{group="mirage", env="prod"}[5m])) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value > 10000
+/*
+PostgreSQL: high number of slow queries
+*/
+pql avg(rate(pg_stat_activity_max_tx_duration{group="mirage", env="prod"}[2m])) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value > 2 * 60
+/*
+PostgreSQL: low cache hit rate
+*/
+pql avg(rate(pg_stat_database_blks_hit{group="mirage", env="prod"}[5m]) / (rate(pg_stat_database_blks_hit{group="mirage", env="prod"}[5m]) + rate(pg_stat_database_blks_read{group="mirage", env="prod"}[5m]))) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 0.90
+/*
+PostgreSQL: Max connections
+*/
+pql step=1m sum(pg_stat_activity_count {group="mirage", env="prod"}) by (value,inst) > (sum(pg_settings_max_connections {group="mirage", env="prod"}) by (value,inst) - sum(pg_settings_superuser_reserved_connections{group="mirage", env="prod"}) by (value,inst)) * 0.8
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value > 0
+/*
+PostgreSQL: service is DOWN
+*/
+pql step=2m count(pg_up{group="mirage", env="prod", system="postgresql_exporter"}) by (value,inst)
+| stats latest(value) as value, latest(@timestamp) as @timestamp by  inst
+| eval date=date_format(date_change_offset(@timestamp,"+03:00"),"dd.MM.Y HH:mm:ss")
+| where value < 1
+/*
+PostgreSQL: Max connections
+*/

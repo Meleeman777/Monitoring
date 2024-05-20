@@ -1,0 +1,1331 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 456,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Ops-Infrastructure"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#447EBC",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{}"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#DEDAF7",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 3,
+          "x": 0,
+          "y": 0
+        },
+        "id": 7,
+        "links": [],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": true
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql count(rate(container_last_seen{group=\"pmp\", inst=~\"$cluster1\"})) by (container_label_com_docker_stack_namespace) | stats latest(value) as value by container_label_com_docker_stack_namespace",
+            "format": "table",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{container_label_com_docker_stack_namespace}}",
+            "metric": "container_last_seen",
+            "pql": false,
+            "refId": "A",
+            "size": 100000,
+            "step": 600
+          }
+        ],
+        "title": "Containers  (by Stack)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 3,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "last"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql count(count(container_cpu_usage_seconds_total{group=\"pmp\", inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name))",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Services",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "log": 2,
+                "type": "log"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 16,
+          "x": 8,
+          "y": 0
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "none",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.2.3",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum sum(rate(round(container_last_seen{group=\"$group\",inst=~\"$cluster1\"}))) by (container_label_com_docker_swarm_service_name)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Containers per service",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 5,
+          "x": 3,
+          "y": 4
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql count(count(container_cpu_usage_seconds_total{group=\"pmp\", inst=~\"$cluster1\"}) by (inst))",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Nodes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "dtdurations"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 41,
+          "w": 8,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": true
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.2.3",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql time() - container_start_time_seconds{group=\"$group\",inst=~\"$cluster1\"} \n| stats latest(value) as value by name",
+            "format": "table",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Containers live",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 16,
+          "x": 8,
+          "y": 8
+        },
+        "id": 17,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum topk(10, sum(irate(container_cpu_usage_seconds_total{group=\"$group\",inst=~\"$cluster1\"}[1m])) by (name) / sum(machine_cpu_cores{group=\"pmp\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name) * 100)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "CPU Usage by container (TOP 10)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 16,
+          "x": 8,
+          "y": 16
+        },
+        "id": 11,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum (sum(rate(container_cpu_usage_seconds_total{group=\"pmp\",inst=~\"$cluster1\"}[3m])) by (container_label_com_docker_swarm_service_name) / sum(machine_cpu_cores{group=\"pmp\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name) * 100)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "CPU Usage by service",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 16,
+          "x": 8,
+          "y": 24
+        },
+        "id": 21,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=avg topk(10, avg(container_memory_usage_bytes{group=\"$group\",inst=~\"$cluster1\"}[1m]) by (name))",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Memory usage by Container (top 10)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [
+              {
+                "options": {
+                  "A": {
+                    "index": 0,
+                    "text": "de"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Used "
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Cached "
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 16,
+          "x": 8,
+          "y": 32
+        },
+        "id": 19,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum legend=\"Used {{container_label_com_docker_swarm_service_name}}\" sum(container_memory_usage_bytes{group=\"$group\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum legend=\"Cached {{container_label_com_docker_swarm_service_name}}\"sum(container_memory_cache{group=\"$group\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name)",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "B",
+            "size": 100000
+          }
+        ],
+        "title": "Memory usage by Service",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "value"
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": true,
+                    "tooltip": true,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 16,
+          "x": 8,
+          "y": 40
+        },
+        "id": 13,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "asc"
+          }
+        },
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "${datasource}"
+            },
+            "expr": "pql chart=sum ((sum(container_memory_usage_bytes{group=\"$group\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name) - sum(container_memory_cache{group=\"$group\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name)) / sum(container_memory_usage_bytes{group=\"$group\",inst=~\"$cluster1\"}) by (container_label_com_docker_swarm_service_name)) * 100",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Memory usage by service (percent)",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "MAGE v2",
+            "value": "MAGE v2"
+          },
+          "hide": 2,
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "query": "_-grafana-mage-v2",
+          "refresh": 1,
+          "regex": "/MAGE/",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "pmp",
+            "value": "pmp"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"${__org.name}\"}, group)",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "group",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"${__org.name}\"}, group)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "cadvisor",
+            "value": "cadvisor"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"$group\"}, job)\t",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "job",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"$group\"}, job)\t",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "uat",
+            "value": "uat"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"$group\",job=\"$job\"}, env)\t",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "env",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"$group\",job=\"$job\"}, env)\t",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "ec01-pmpmgru221.idc.nspk.ru",
+            "value": "ec01-pmpmgru221.idc.nspk.ru"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\"}, inst)\t",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "inst",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\"}, inst)\t",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "q1_nginx_cache",
+            "value": "q1_nginx_cache"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\"}, container_label_com_docker_swarm_service_name)",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "service",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\"}, container_label_com_docker_swarm_service_name)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {
+            "selected": true,
+            "text": [
+              "uat_lan"
+            ],
+            "value": [
+              "uat_lan"
+            ]
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "pql step=30s count(container_last_seen{group=\"pmp\"}) by (inst)\n| stats count by inst\n| eval type=case(inst in ['ec01-pmpmgr1.idc.nspk.ru','ec01-pmpmgr2.idc.nspk.ru','ec01-pmpmgr3.idc.nspk.ru','ec01-pmpw1.idc.nspk.ru'], \"prod_dmz_ec01\", inst in ['ec02-pmpmgr1.idc.nspk.ru','ec02-pmpmgr2.idc.nspk.ru','ec02-pmpmgr3.idc.nspk.ru','ec02-pmpw1.idc.nspk.ru'], \"prod_dmz_ec02\", inst in ['ec01-pmpmgrl1.idc.nspk.ru','ec01-pmpmgrl2.idc.nspk.ru','ec01-pmpmgrl3.idc.nspk.ru','ec01-pmpwl1.idc.nspk.ru','ec01-pmpwl2.idc.nspk.ru'], \"prod_lan_ec01\", inst in ['ec02-pmpmgrl1.idc.nspk.ru','ec02-pmpmgrl2.idc.nspk.ru','ec02-pmpmgrl3.idc.nspk.ru','ec02-pmpwl1.idc.nspk.ru','ec02-pmpwl2.idc.nspk.ru'], \"prod_lan_ec02\", inst in['ec01-pmpmgru221.idc.nspk.ru','ec01-pmpmgru222.idc.nspk.ru','ec01-pmpmgru223.idc.nspk.ru','ec01-pmpwu221.idc.nspk.ru'], \"uat_lan\", inst in ['ec01-pmpmgru211.idc.nspk.ru','ec01-pmpmgru212.idc.nspk.ru','ec01-pmpmgru213.idc.nspk.ru'], \"uat_dmz_ec01\", inst in ['ec02-pmpmgru211.idc.nspk.ru','ec02-pmpmgru212.idc.nspk.ru','ec02-pmpmgru213.idc.nspk.ru'], \"uat_dmz_ec02\")\n| stats count by type\n| fields type",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "cluster",
+          "options": [],
+          "query": "pql step=30s count(container_last_seen{group=\"pmp\"}) by (inst)\n| stats count by inst\n| eval type=case(inst in ['ec01-pmpmgr1.idc.nspk.ru','ec01-pmpmgr2.idc.nspk.ru','ec01-pmpmgr3.idc.nspk.ru','ec01-pmpw1.idc.nspk.ru'], \"prod_dmz_ec01\", inst in ['ec02-pmpmgr1.idc.nspk.ru','ec02-pmpmgr2.idc.nspk.ru','ec02-pmpmgr3.idc.nspk.ru','ec02-pmpw1.idc.nspk.ru'], \"prod_dmz_ec02\", inst in ['ec01-pmpmgrl1.idc.nspk.ru','ec01-pmpmgrl2.idc.nspk.ru','ec01-pmpmgrl3.idc.nspk.ru','ec01-pmpwl1.idc.nspk.ru','ec01-pmpwl2.idc.nspk.ru'], \"prod_lan_ec01\", inst in ['ec02-pmpmgrl1.idc.nspk.ru','ec02-pmpmgrl2.idc.nspk.ru','ec02-pmpmgrl3.idc.nspk.ru','ec02-pmpwl1.idc.nspk.ru','ec02-pmpwl2.idc.nspk.ru'], \"prod_lan_ec02\", inst in['ec01-pmpmgru221.idc.nspk.ru','ec01-pmpmgru222.idc.nspk.ru','ec01-pmpmgru223.idc.nspk.ru','ec01-pmpwu221.idc.nspk.ru'], \"uat_lan\", inst in ['ec01-pmpmgru211.idc.nspk.ru','ec01-pmpmgru212.idc.nspk.ru','ec01-pmpmgru213.idc.nspk.ru'], \"uat_dmz_ec01\", inst in ['ec02-pmpmgru211.idc.nspk.ru','ec02-pmpmgru212.idc.nspk.ru','ec02-pmpmgru213.idc.nspk.ru'], \"uat_dmz_ec02\")\n| stats count by type\n| fields type",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {
+            "selected": false,
+            "text": "ec01-pmpmgru221.idc.nspk.ru|ec01-pmpmgru222.idc.nspk.ru|ec01-pmpmgru223.idc.nspk.ru|ec01-pmpwu221.idc.nspk.ru",
+            "value": "ec01-pmpmgru221.idc.nspk.ru|ec01-pmpmgru222.idc.nspk.ru|ec01-pmpmgru223.idc.nspk.ru|ec01-pmpwu221.idc.nspk.ru"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "lookup group=\"pmp\" table=\"pmp\"\n| eval type=\"$cluster\"\n| eval type=case(type=\"prod_dmz_ec01\",\"ec01-pmpmgr1.idc.nspk.ru|ec01-pmpmgr2.idc.nspk.ru|ec01-pmpmgr3.idc.nspk.ru|ec01-pmpw1.idc.nspk.ru\",type=\"prod_dmz_ec02\",\"ec02-pmpmgr1.idc.nspk.ru|ec02-pmpmgr2.idc.nspk.ru|ec02-pmpmgr3.idc.nspk.ru|ec02-pmpw1.idc.nspk.ru\",type=\"prod_lan_ec01\",\"ec01-pmpmgrl1.idc.nspk.ru|ec01-pmpmgrl2.idc.nspk.ru|ec01-pmpmgrl3.idc.nspk.ru|ec01-pmpwl1.idc.nspk.ru|ec01-pmpwl2.idc.nspk.ru\",type=\"prod_lan_ec02\",\"ec02-pmpmgrl1.idc.nspk.ru|ec02-pmpmgrl2.idc.nspk.ru|ec02-pmpmgrl3.idc.nspk.ru|ec02-pmpwl1.idc.nspk.ru|ec02-pmpwl2.idc.nspk.ru\",type=\"uat_lan\",\"ec01-pmpmgru221.idc.nspk.ru|ec01-pmpmgru222.idc.nspk.ru|ec01-pmpmgru223.idc.nspk.ru|ec01-pmpwu221.idc.nspk.ru\", type=\"uat_dmz_ec01\", \"ec01-pmpmgru211.idc.nspk.ru|ec01-pmpmgru212.idc.nspk.ru|ec01-pmpmgru213.idc.nspk.ru\", type=\"uat_dmz_ec02\", \"ec02-pmpmgru211.idc.nspk.ru|ec02-pmpmgru212.idc.nspk.ru|ec02-pmpmgru213.idc.nspk.ru\" )\n| fields type",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "cluster1",
+          "options": [],
+          "query": "lookup group=\"pmp\" table=\"pmp\"\n| eval type=\"$cluster\"\n| eval type=case(type=\"prod_dmz_ec01\",\"ec01-pmpmgr1.idc.nspk.ru|ec01-pmpmgr2.idc.nspk.ru|ec01-pmpmgr3.idc.nspk.ru|ec01-pmpw1.idc.nspk.ru\",type=\"prod_dmz_ec02\",\"ec02-pmpmgr1.idc.nspk.ru|ec02-pmpmgr2.idc.nspk.ru|ec02-pmpmgr3.idc.nspk.ru|ec02-pmpw1.idc.nspk.ru\",type=\"prod_lan_ec01\",\"ec01-pmpmgrl1.idc.nspk.ru|ec01-pmpmgrl2.idc.nspk.ru|ec01-pmpmgrl3.idc.nspk.ru|ec01-pmpwl1.idc.nspk.ru|ec01-pmpwl2.idc.nspk.ru\",type=\"prod_lan_ec02\",\"ec02-pmpmgrl1.idc.nspk.ru|ec02-pmpmgrl2.idc.nspk.ru|ec02-pmpmgrl3.idc.nspk.ru|ec02-pmpwl1.idc.nspk.ru|ec02-pmpwl2.idc.nspk.ru\",type=\"uat_lan\",\"ec01-pmpmgru221.idc.nspk.ru|ec01-pmpmgru222.idc.nspk.ru|ec01-pmpmgru223.idc.nspk.ru|ec01-pmpwu221.idc.nspk.ru\", type=\"uat_dmz_ec01\", \"ec01-pmpmgru211.idc.nspk.ru|ec01-pmpmgru212.idc.nspk.ru|ec01-pmpmgru213.idc.nspk.ru\", type=\"uat_dmz_ec02\", \"ec02-pmpmgru211.idc.nspk.ru|ec02-pmpmgru212.idc.nspk.ru|ec02-pmpmgru213.idc.nspk.ru\" )\n| fields type",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "qe1",
+            "value": "qe1"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "definition": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\",inst=~\"$cluster1\"}, container_label_com_docker_stack_namespace)",
+          "hide": 2,
+          "includeAll": false,
+          "multi": false,
+          "name": "stack",
+          "options": [],
+          "query": "label_values(container_last_seen{group=\"$group\", job=\"$job\", env=\"$env\",inst=~\"$cluster1\"}, container_label_com_docker_stack_namespace)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "[PMP] Cadvisor",
+    "uid": "VgMd2mDSz2r2fwfw",
+    "version": 72,
+    "weekStart": ""
+  }

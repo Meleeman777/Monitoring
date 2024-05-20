@@ -1,0 +1,1152 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 403,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 10
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "maxPerRow": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "repeat": "inst",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "editorMode": "code",
+            "expr": "pql step=1m time() - process_start_time_seconds{job=\"keepalived_exporter\" , inst=~\"$inst\"} | stats last(value)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "__auto",
+            "pql": false,
+            "range": true,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Up time $inst",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "yellow",
+                    "index": 0,
+                    "text": "INIT"
+                  },
+                  "1": {
+                    "color": "text",
+                    "index": 1,
+                    "text": "BACKUP"
+                  },
+                  "2": {
+                    "color": "green",
+                    "index": 2,
+                    "text": "MASTER "
+                  },
+                  "3": {
+                    "color": "red",
+                    "index": 3,
+                    "text": "FAULT"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 5
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "last"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "repeat": "inst",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "editorMode": "code",
+            "expr": "pql step=1m keepalived_vrrp_state{inst=~\"$inst\"} | stats last(value)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "__auto",
+            "pql": false,
+            "range": true,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "$inst",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 8
+        },
+        "id": 23,
+        "maxPerRow": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "name"
+        },
+        "pluginVersion": "9.2.3",
+        "repeat": "inst",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "editorMode": "code",
+            "expr": "pql chart=sum step=1m legend=\"{{ ip_address}}\" keepalived_vrrp_state{inst=~\"$inst\"} ",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "__auto",
+            "pql": false,
+            "range": true,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "index": 0,
+                    "text": "DOWN"
+                  },
+                  "1": {
+                    "color": "green",
+                    "index": 1,
+                    "text": "UP"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 11
+        },
+        "id": 8,
+        "maxPerRow": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.3",
+        "repeat": "inst",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "editorMode": "code",
+            "expr": "pql step=1m keepalived_up{inst=~\"$inst\"} | stats last(value)",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "__auto",
+            "pql": false,
+            "range": true,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Keepalived Status $inst",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 15
+        },
+        "id": 49,
+        "panels": [],
+        "title": "Charts",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 10,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "editorMode": "code",
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - become\" rate(keepalived_become_master_total{inst=~\"$inst\"}[$__rate_interval])",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "__auto",
+            "pql": false,
+            "range": true,
+            "refId": "A",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - release\" rate(keepalived_release_master_total{inst=~\"$inst\"}[$__rate_interval])",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "B",
+            "size": 100000
+          }
+        ],
+        "title": "Master Changes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - received\"  rate(keepalived_advertisements_received_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - sent\" rate(keepalived_advertisements_sent_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "B",
+            "size": 100000
+          }
+        ],
+        "title": "Advertisements",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "id": 17,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - sent\" rate(keepalived_priority_zero_sent_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - received\" rate(keepalived_priority_zero_received_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "B",
+            "size": 100000
+          }
+        ],
+        "title": "Priority Zero",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        },
+        "id": 19,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}}\" rate(keepalived_gratuitous_arp_delay_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          }
+        ],
+        "title": "Gratuitous ARP Delay",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "P21BB2A4D622268FF"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 32
+        },
+        "id": 21,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean",
+              "last"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Max",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Advertisement interval errors \" rate(keepalived_advertisements_interval_errors_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "A",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Packet length errors\" rate(keepalived_packet_length_errors_total{inst=~\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "B",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - IP TTL errors\" rate(keepalived_ip_ttl_errors_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "C",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Invalid type received\" rate(keepalived_invalid_type_received_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "D",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Address list errors\" rate(keepalived_address_list_errors_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "E",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Authentication invalid\" rate(keepalived_authentication_invalid_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "F",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Authentication failure\" rate(keepalived_authentication_failure_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "G",
+            "size": 100000
+          },
+          {
+            "chart": "prefix",
+            "datasource": {
+              "type": "_-grafana-mage-v2",
+              "uid": "P21BB2A4D622268FF"
+            },
+            "expr": "pql chart=sum step=1m legend=\"{{ iname }} {{inst}} - Authentication mismatch\" rate(keepalived_authentication_mismatch_total{inst=\"$inst\"}[$__rate_interval])\n",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "pql": false,
+            "refId": "H",
+            "size": 100000
+          }
+        ],
+        "title": "Errors",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "10s",
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": ".*",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "definition": "label_values(keepalived_up{group=\"$group\"}, dc)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": false,
+          "name": "dc",
+          "options": [],
+          "query": "label_values(keepalived_up{group=\"$group\"}, dc)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "hide": 2,
+          "name": "group",
+          "query": "mirage",
+          "skipUrlSync": false,
+          "type": "constant"
+        },
+        {
+          "allValue": ".*",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "P21BB2A4D622268FF"
+          },
+          "definition": "label_values(keepalived_up{group=\"$group\",dc=~\"$dc\"}, inst)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "inst",
+          "multi": true,
+          "name": "inst",
+          "options": [],
+          "query": "label_values(keepalived_up{group=\"$group\",dc=~\"$dc\"}, inst)",
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Keepalived_exporter",
+    "uid": "EuDZ7bJ4z",
+    "version": 2,
+    "weekStart": ""
+  }

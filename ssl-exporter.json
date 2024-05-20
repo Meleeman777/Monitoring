@@ -1,0 +1,463 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Shows certitificate expiration times, as well as failed ssl connects",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 11279,
+  "graphTooltip": 0,
+  "id": 439,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 2,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 10,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "text": {
+          "titleSize": 15,
+          "valueSize": 25
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "expr": "pql step=1m ssl_probe_success{group=\"$group\", env=\"$env\", instance!~\".+9219+\"} | stats latest(value) as value  by instance",
+          "format": "table",
+          "interval": "",
+          "legendFormat": "",
+          "pql": false,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "Status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "light-yellow",
+                "value": 2674800
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 7945210
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 11,
+        "x": 10,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "expr": "pql step=1m ssl_verified_cert_not_after{group=\"$group\", env=\"$env\"} - time() | stats latest(value) as value,  by instance",
+          "format": "table",
+          "interval": "",
+          "legendFormat": "",
+          "pql": false,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "SSL Certs by URL",
+      "type": "stat"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 4,
+      "panels": [],
+      "repeat": "target",
+      "repeatDirection": "h",
+      "title": "$target",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "_-grafana-mage-v2",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-yellow",
+                "value": 2674800
+              },
+              {
+                "color": "dark-green",
+                "value": 7945210
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 21,
+        "x": 0,
+        "y": 18
+      },
+      "id": 2,
+      "interval": "",
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "text": {
+          "titleSize": 25,
+          "valueSize": 25
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "chart": "prefix",
+          "datasource": {
+            "type": "_-grafana-mage-v2",
+            "uid": "${datasource}"
+          },
+          "expr": "pql step=1m  ssl_file_cert_not_after{group=\"$group\", inst=~\"$target\", file!~\".+bundle.+\"} - time() | stats latest(value) as value,  by file",
+          "format": "table",
+          "interval": "",
+          "legendFormat": "",
+          "pql": false,
+          "refId": "A",
+          "size": 100000
+        }
+      ],
+      "title": "SSL Certs by File",
+      "type": "stat"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "ssl",
+    "tls"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "pmp",
+          "value": "pmp"
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(up{group=\"${__org.name}\"}, group)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "group",
+        "options": [],
+        "query": "label_values(up{group=\"${__org.name}\"}, group)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "ec02",
+          "value": "ec02"
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(ssl_probe_success{group=\"$group\", dc!=\"http\"}, dc)",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "dc",
+        "options": [],
+        "query": "label_values(ssl_probe_success{group=\"$group\", dc!=\"http\"}, dc)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "MAGE v2",
+          "value": "MAGE v2"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "_-grafana-mage-v2",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "uat",
+          "value": "uat"
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(ssl_probe_success{group=\"$group\"}, env)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "env",
+        "options": [],
+        "query": "label_values(ssl_probe_success{group=\"$group\"}, env)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "_-grafana-mage-v2",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(ssl_probe_success{group=\"$group\",env=\"$env\"}, inst)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "",
+        "multi": true,
+        "name": "target",
+        "options": [],
+        "query": "label_values(ssl_probe_success{group=\"$group\",env=\"$env\"}, inst)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2023-12-14T01:45:10.791Z",
+    "to": "2023-12-16T17:45:10.791Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "[PMP] SSL Exporter",
+  "uid": "HyKQlVGWkfwf",
+  "version": 42,
+  "weekStart": ""
+}
